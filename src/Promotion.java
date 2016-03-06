@@ -26,7 +26,7 @@ public class Promotion {
         return barcode;
     }
 
-    public List<Promotion> loadPromotions(){
+    public static List<Promotion> loadPromotions(){
         List<Promotion> promotions = new ArrayList<Promotion>();
         String[] barcodes = {"ITEM000000","ITEM000001","ITEM000005"};
         Promotion promotion = new Promotion("BUY_TWO_GET_ONE_FREE",barcodes);
