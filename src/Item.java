@@ -46,13 +46,13 @@ public class Item {
         this.price = price;
     }
 
-    public List<Item> loadAllItems() {
+    public static List<Item> loadAllItems() {
         List<Item> allItems = new ArrayList<Item>();
         Item item = new Item("ITEM000000", "可口可乐", "瓶", 3.00);
         allItems.add(item);
         item = new Item("ITEM000001", "雪碧", "瓶", 3.00);
         allItems.add(item);
-        item = new Item("ITEM000002", "雪碧", "瓶", 3.00);
+        item = new Item("ITEM000002", "苹果", "斤", 5.50);
         allItems.add(item);
         item = new Item("ITEM000003", "荔枝", "斤", 3.00);
         allItems.add(item);
