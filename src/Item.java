@@ -54,7 +54,7 @@ public class Item {
         allItems.add(item);
         item = new Item("ITEM000002", "苹果", "斤", 5.50);
         allItems.add(item);
-        item = new Item("ITEM000003", "荔枝", "斤", 3.00);
+        item = new Item("ITEM000003", "荔枝", "斤", 15.00);
         allItems.add(item);
         item = new Item("ITEM000004", "电池", "个", 2.00);
         allItems.add(item);
