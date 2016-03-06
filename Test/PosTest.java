@@ -13,10 +13,14 @@ import static org.junit.Assert.assertTrue;
 public class PosTest {
 
     private List<Item> allItems;
+    private List<Promotion> promotions;
+    private Pos pos;
 
     @Before
     public void setUp() {
         allItems = Item.loadAllItems();
+        promotions =Promotion.loadPromotions();
+        pos = new Pos();
     }
 
     @Test
@@ -39,7 +43,7 @@ public class PosTest {
         cartItem = new CartItem(allItems.get(5), 3);
         expectations.add(cartItem);
 
-        Pos pos = new Pos();
+
         List<CartItem> result = pos.getCartItems(tags, allItems);
         assertThat(result.size(),is(expectations.size()));
         for (int i = 0; i < result.size(); i++) {
@@ -48,4 +52,20 @@ public class PosTest {
         }
     }
 
+    @Test
+    public void get_correct_subprice_when_input_promotions(){
+        List<CartItem> cartItems = new ArrayList<CartItem>();
+        CartItem cartItem = new CartItem(allItems.get(1),5.00);
+        cartItems.add(cartItem);
+        cartItem = new CartItem(allItems.get(3),2.00);
+        cartItems.add(cartItem);
+        cartItem = new CartItem(allItems.get(5),3.00);
+        cartItems.add(cartItem);
+
+        double[] expectations = {12.00,30.00,9.00};
+        List<ReceiptItem> ReceiptItems = pos.getReceiptItem(cartItems,promotions);
+        for(int i =0;i<3;i++){
+            assertThat(ReceiptItems.get(i).getSubtotal(),is(expectations[i]));
+        }
+    }
 }
