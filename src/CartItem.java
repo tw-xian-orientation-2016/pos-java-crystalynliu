@@ -1,12 +1,12 @@
 public class CartItem {
     private Item item;
-    private int count;
+    private double count;
 
-    public CartItem(Item item,int count){
+    public CartItem(Item item,double count){
         this.item = item;
         this.count = count;
     }
-    public int getCount() {
+    public double getCount() {
         return count;
     }
 
@@ -14,7 +14,7 @@ public class CartItem {
         return item;
     }
 
-    public void setCount(int count) {
+    public void setCount(double count) {
         this.count = count;
     }
 
