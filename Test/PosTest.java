@@ -95,4 +95,5 @@ public class PosTest {
         String result = pos.printReceipt(receiptItems);
         assertThat(result,is(expectation));
     }
+
 }

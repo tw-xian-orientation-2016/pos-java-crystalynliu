@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,6 +7,15 @@ import java.util.List;
  * Created by crystalynliu on 3/6/16.
  */
 public class Pos {
+    private BufferedWriter writer;
+    public Pos(BufferedWriter writer){
+        this.writer = writer;
+    }
+
+    public Pos() {
+
+    }
+
     public List<CartItem> getCartItems(String[] tags,List<Item> allItems){
         List<CartItem> cartItems= new ArrayList<CartItem>();
         for(int i=0;i<tags.length;i++){
@@ -100,6 +111,16 @@ public class Pos {
                 "节省："+df.format(totalSave)+"(元)\n" +
                 "**********************";
         return text;
+    }
+
+    public void posPrint(String[] tags) throws IOException {
+        List<Item> items = Item.loadAllItems();
+        List<Promotion> promotions = Promotion.loadPromotions();
+
+        List<CartItem> cartItems = getCartItems(tags,items);
+        List<ReceiptItem> receiptItems = getReceiptItem(cartItems,promotions);
+        String text = printReceipt(receiptItems);
+        this.writer.write(text);
     }
 }
 
