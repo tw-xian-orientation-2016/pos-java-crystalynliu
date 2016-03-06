@@ -36,6 +36,43 @@ public class Pos {
         }
         return index;
     }
+
+
+    public List<ReceiptItem> getReceiptItem(List<CartItem> cartItems, List<Promotion> promotions) {
+        List<ReceiptItem> receiptItems = new ArrayList<ReceiptItem>();
+        cartItems.forEach(cartItem -> {
+            double price = cartItem.getItem().getPrice();
+            double count = cartItem.getCount();
+
+            double subTotal = price*count;
+            double subSave = 0;
+            String type = findCartItemType(cartItem,promotions);
+            if(type.equals("BUY_TWO_GET_ONE_FREE")){
+                subSave =  (int)(count/3) * price;
+                subTotal = subTotal - subSave;
+            }
+            ReceiptItem receiptItem = new ReceiptItem();
+            receiptItem.setCartItem(cartItem);
+            receiptItem.setSubSave(subSave);
+            receiptItem.setSubtotal(subTotal);
+            receiptItems.add(receiptItem);
+        });
+        return receiptItems;
+    }
+
+    private String findCartItemType(CartItem cartItem, List<Promotion> promotions) {
+        String type = "";
+        for(int i =0 ;i<promotions.size();i++){
+            String[] barcodes = promotions.get(i).getBarcode();
+            for(int k = 0;k<barcodes.length;k++){
+                if(cartItem.getItem().getBarcode().equals(barcodes[k])){
+                    type = promotions.get(i).getType();
+                    break;
+                }
+            }
+        }
+        return type;
+    }
 }
 
 
