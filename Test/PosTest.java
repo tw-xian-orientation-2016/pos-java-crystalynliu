@@ -15,6 +15,15 @@ public class PosTest {
     private List<Item> allItems;
     private List<Promotion> promotions;
     private Pos pos;
+    private String[] tags = {"ITEM000001",
+            "ITEM000001",
+            "ITEM000001",
+            "ITEM000001",
+            "ITEM000001",
+            "ITEM000003-2",
+            "ITEM000005",
+            "ITEM000005",
+            "ITEM000005"};
 
     @Before
     public void setUp() {
@@ -25,15 +34,6 @@ public class PosTest {
 
     @Test
     public void get_correct_cartItems_when_input_tags() {
-        String[] tags = {"ITEM000001",
-                "ITEM000001",
-                "ITEM000001",
-                "ITEM000001",
-                "ITEM000001",
-                "ITEM000003-2",
-                "ITEM000005",
-                "ITEM000005",
-                "ITEM000005"};
 
         List<CartItem> expectations = new ArrayList<CartItem>();
         CartItem cartItem = new CartItem(allItems.get(1), 5);
