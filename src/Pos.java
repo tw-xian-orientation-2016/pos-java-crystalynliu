@@ -73,6 +73,34 @@ public class Pos {
         }
         return type;
     }
+
+    public String printReceipt(List<ReceiptItem> receiptItems) {
+        double totalPrice = 0;
+        double totalSave = 0;
+
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+
+        String text = "***<没钱赚商店>收据***\n";
+
+        for(int i = 0;i<receiptItems.size();i++){
+            ReceiptItem receiptItem = receiptItems.get(i);
+            totalPrice+=receiptItem.getSubtotal();
+            totalSave+=receiptItem.getSubSave();
+
+            text+="名称："+receiptItem.getCartItem().getItem().getName()+
+                    "，数量："+(int)receiptItem.getCartItem().getCount() +
+                    receiptItem.getCartItem().getItem().getUnit()+"，单价："+
+                    df.format(receiptItem.getCartItem().getItem().getPrice())+
+                    "(元)，小计："+df.format(receiptItem.getSubtotal())+"(元)\n";
+
+        }
+
+        text+="----------------------\n" +
+                "总计："+df.format(totalPrice)+"(元)\n"+
+                "节省："+df.format(totalSave)+"(元)\n" +
+                "**********************";
+        return text;
+    }
 }
 
 
